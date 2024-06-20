@@ -1,6 +1,6 @@
 ﻿namespace SeleniteSeaScript.Variables
 {
-	internal class StringVariable : Variable
+	public class StringVariable : Variable
 	{
 		public StringVariable(string? value) : base(VariableType.String, value) { }
 
@@ -13,10 +13,10 @@
 		public char[] ToArray => Value.ToCharArray();
 
 		public static StringVariable operator +(StringVariable a, Variable b) => new(a.Value + b.Value?.ToString());
-		public static StringVariable operator *(StringVariable a, IntegerVariable b) 
+		public static StringVariable operator *(StringVariable a, NumericVariable b) 
 		{
 			string os = "";
-			for(int i = 0; i < b.Value; i++)
+			for(int i = 0; i < (b.Value - 0.5); i++)
 				os += a.Value.ToString();
 			return new(os);
 		}

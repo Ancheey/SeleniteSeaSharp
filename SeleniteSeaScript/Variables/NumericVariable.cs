@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace SeleniteSeaScript.Variables
 {
-	public abstract class NumericVariable : Variable
+	public class NumericVariable : Variable
 	{
-		public NumericVariable(decimal? value) : base(VariableType.Integer, value)
+		public NumericVariable(double? value) : base(VariableType.Integer, value)
 		{
 		}
-		public new decimal Value
+		public new double Value
 		{
-			get => (decimal?)base.Value ?? 0;
+			get => (double?)base.Value ?? 0;
 			set => base.Value = value;
 		}
 		public enum Comparers
@@ -26,11 +26,49 @@ namespace SeleniteSeaScript.Variables
 			LESS_THAN_OR_EQUAL,
 		}
 
+		public static NumericVariable operator +(NumericVariable l, NumericVariable r)
+		{
+			return new NumericVariable(l.Value + r.Value);
+		}
+		public static NumericVariable operator -(NumericVariable l, NumericVariable r)
+		{
+			return new NumericVariable(l.Value - r.Value);
+		}
+		public static NumericVariable operator *(NumericVariable l, NumericVariable r)
+		{
+			return new NumericVariable(l.Value * r.Value);
+		}
+		public static NumericVariable operator /(NumericVariable l, NumericVariable r)
+		{
+			return new NumericVariable(l.Value / r.Value);
+		}
+		public static BooleanVariable operator <(NumericVariable l, NumericVariable r)
+		{
+			return new BooleanVariable(l.Value < r.Value);
+		}
+		public static BooleanVariable operator >(NumericVariable l, NumericVariable r)
+		{
+			return new BooleanVariable(l.Value > r.Value);
+		}
+		public static BooleanVariable operator <=(NumericVariable l, NumericVariable r)
+		{
+			return new BooleanVariable(l.Value <= r.Value);
+		}
+		public static BooleanVariable operator >=(NumericVariable l, NumericVariable r)
+		{
+			return new BooleanVariable(l.Value >= r.Value);
+		}
+		public static BooleanVariable operator ==(NumericVariable l, NumericVariable r)
+		{
+			return new BooleanVariable(l.Value == r.Value);
+		}
+		public static BooleanVariable operator !=(NumericVariable l, NumericVariable r)
+		{
+			return new BooleanVariable(l.Value != r.Value);
+		}
+
 		public override bool Equals(object? obj) => obj is not null && ReferenceEquals(this, obj);
 
-		public override int GetHashCode()
-		{
-			return Value.GetHashCode();
-		}
+		public override int GetHashCode() => Value.GetHashCode();
 	}
 }
