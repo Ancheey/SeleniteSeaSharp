@@ -11,26 +11,30 @@ namespace SeleniteSeaScript.Interfaces
 {
     public interface IScope
     {
-        protected List<ScriptAction> ScopeActions { get; set; }
-        public ImmutableList<ScriptAction> GetScopeActions() => ScopeActions.ToImmutableList();
+        public Scope Scope { get; init; }
+    }
+    public class Scope
+    {
+        protected List<ScriptAction> Actions { get; set; } = new List<ScriptAction>();
+        public ImmutableList<ScriptAction> GetActions() => Actions.ToImmutableList();
 
-        public void AddScopeAction(ScriptAction action) => ScopeActions.Add(action);
-        public void AddScopeAction(ScriptAction action, int index) => ScopeActions.Insert(index, action);
-        public void MoveAction(int indexA,int targetIndex)
+        public void AddAction(ScriptAction action) => Actions.Add(action);
+        public void AddAction(ScriptAction action, int index) => Actions.Insert(index, action);
+        public void MoveAction(int indexA, int targetIndex)
         {
-            var a = ScopeActions[indexA];
-            ScopeActions.RemoveAt(indexA);
-            ScopeActions.Insert(targetIndex, a);
+            var a = Actions[indexA];
+            Actions.RemoveAt(indexA);
+            Actions.Insert(targetIndex, a);
         }
-        public bool RemoveScopeAction(ScriptAction action) => ScopeActions.Remove(action);
-        public bool RemoveScopeAction(int index, out Exception? exception)
+        public bool RemoveAction(ScriptAction action) => Actions.Remove(action);
+        public bool RemoveAction(int index, out Exception? exception)
         {
-            if (index > ScopeActions.Count)
+            if (index > Actions.Count)
             {
-                exception = new IndexOutOfRangeException($"Cannot remove action no. {index}. Index out of range. (max {ScopeActions.Count})");
+                exception = new IndexOutOfRangeException($"Cannot remove action no. {index}. Index out of range. (max {Actions.Count})");
                 return false;
             }
-            ScopeActions.RemoveAt(index);
+            Actions.RemoveAt(index);
             exception = null;
             return true;
         }

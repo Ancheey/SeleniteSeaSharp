@@ -11,11 +11,11 @@ namespace SeleniteSeaScript
 {
     public abstract class ScriptAction
 	{
-        public IScope? Scope { get; set; }
+        public IScope? Parent { get; set; }
 
-		public ScriptAction(IScope? scope)
+		public ScriptAction(IScope? ParentScope)
 		{
-			Scope = scope;
+            Parent = ParentScope;
 		}
 		public abstract bool Execute(out Exception? exception);
 	}

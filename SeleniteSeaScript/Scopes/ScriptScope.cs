@@ -9,29 +9,32 @@ using System.Threading.Tasks;
 
 namespace SeleniteSeaScript.Scopes
 {
-    public class ProjectScope<T> : ScriptAction, IHasValue<T>, IHasParams, IHasVariables, IScope where T : Variable
+    public class ProjectScope<T> : ScriptAction, IHasValue<T>, IHasVariables, IHasParams, IScope where T : Variable
     {
 		private readonly string _name;
 		public VariableType? ReturnType { get; private set; }
-		public Variable? DefaultReturnValue { get; private set; } = null;
-		public Variable? ReturnValue { get; private set; } = null;
-        Dictionary<string, Variable> IHasVariables.Variables { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        List<ScriptAction> IScope.ScopeActions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        T IHasValue<T>.Value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+        public T? Value { get; set; } = null;
+        public Interfaces.Variables Variables { get; init; } = new();
+        public Scope Scope { get; init; } = new();
+        public Params Params { get; set; }
         public ProjectScope(string projectTitle) : base(null)
         {
             _name = projectTitle;
+            Params = new Params(Variables, new Dictionary<string, Params.ParamDescriptor>());
         }
-
-        public override bool Execute(out Exception? exception)
+        public void ReadProjectData()
         {
             throw new NotImplementedException();
         }
-
-        public ImmutableDictionary<string, IHasParams.ParamDescriptor> GetParams()
+        public override bool Execute(out Exception? exception)
         {
-            throw new NotImplementedException(); //Add some way to read required params from the file and addition of em 
+            foreach (var scope in Scope.GetActions())
+                if (!scope.Execute(out exception))
+                    return false;
+
+            //Correct Execution of all Actions whthin the scope
+            exception = null;
+            return true;
         }
     }
 }

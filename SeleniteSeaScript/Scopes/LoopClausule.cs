@@ -1,10 +1,5 @@
 ﻿using SeleniteSeaScript.Interfaces;
 using SeleniteSeaScript.Variables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeleniteSeaScript.Scopes
 {
@@ -12,17 +7,17 @@ namespace SeleniteSeaScript.Scopes
     {
         BooleanVariable DoWhile { get; set; }
         private bool _isLoopBroken = false;
-        public LoopClausule(BooleanVariable booleanStatement,IScope? Parent, Dictionary<string, Variable> derivedVariables) : base(Parent, derivedVariables)
+        public LoopClausule(BooleanVariable booleanStatement, IScope? Parent = null, Interfaces.Variables? derived = null) : base(Parent, derived)
         {
             DoWhile = booleanStatement;
         }
         public void Break() => _isLoopBroken = true;
-        public new bool ExecuteScope(out Exception? exception)
+        public new bool Execute(out Exception? exception)
         {
             exception = null;
             while (DoWhile.Value == false && !_isLoopBroken)
             {
-                foreach (var scope in GetScopeActions()) {
+                foreach (var scope in Scope.GetActions()) {
                     if (_isLoopBroken)
                         return true;
                     if (!scope.Execute(out exception))

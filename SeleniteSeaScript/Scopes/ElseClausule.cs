@@ -4,13 +4,13 @@ using SeleniteSeaScript.Variables;
 
 namespace SeleniteSeaScript.Scopes
 {
-    internal class ElseClausule : BasicScope
+    public class ElseClausule : BasicScope
 	{
-		public ElseClausule(IScope? Parent, Dictionary<string, Variable> derivedVariables) : base(Parent, derivedVariables)
-		{}
-		public new bool ExecuteScope(out Exception? exception)
+		//Parent required
+		public ElseClausule(IScope? Parent, Interfaces.Variables? derived = null) : base(Parent,derived) { }
+		public new bool Execute(out Exception? exception)
 		{
-			var ScopeActions = Scope?.GetScopeActions();
+			var ScopeActions = Parent?.Scope.GetActions();
 			if (ScopeActions is null) {
 				exception = new SeleniteSeaException("Else found itself without a scope! Impossible!",this);
 				return false;
@@ -23,8 +23,8 @@ namespace SeleniteSeaScript.Scopes
 			}
 			if (ScopeActions[ScopeActionIDOfThis - 1] is IfClausule IFC)
 			{
-				if (IFC.expectedOutput != IFC.evaluatedOutput) //Execute scope if the previous If or elseIF didn't execute
-					return base.ExecuteScope(out exception);
+				if (IFC.ExpectedOutput != IFC.EvaluatedOutput) //Execute scope if the previous If or elseIF didn't execute
+					return base.Execute(out exception);
 				else
 				{
 					exception = null;

@@ -11,17 +11,18 @@ namespace SeleniteSeaScript.Scopes
     public class IfClausule : BasicScope
 	{
 		protected readonly BooleanVariable booleanVariable;
-		public bool expectedOutput { get;protected set; }
-		public bool? evaluatedOutput { get; protected set; } = null;
-		public IfClausule(BooleanVariable booleanStatement,bool expectedOutput, IScope? Parent, Dictionary<string, Variable> derivedVariables) : base(Parent, derivedVariables)
+		public bool ExpectedOutput { get;protected set; }
+		public bool? EvaluatedOutput { get; protected set; } = null;
+		public IfClausule(BooleanVariable booleanStatement, bool expectedOutput, IScope? Parent = null, Interfaces.Variables? derived = null) : base(Parent, derived)
 		{
 			booleanVariable = booleanStatement;
-			this.expectedOutput = expectedOutput;
+			ExpectedOutput = expectedOutput;
 		}
-		public new bool ExecuteScope(out Exception? exception)
+
+        public new bool Execute(out Exception? exception)
 		{
-			if((evaluatedOutput = booleanVariable.Value) == expectedOutput)
-				return base.ExecuteScope(out exception);
+			if((EvaluatedOutput = booleanVariable.Value) == ExpectedOutput)
+				return base.Execute(out exception);
 			else
 			{
 				exception = null;

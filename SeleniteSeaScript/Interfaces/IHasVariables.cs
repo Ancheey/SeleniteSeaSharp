@@ -11,20 +11,31 @@ namespace SeleniteSeaScript.Interfaces
 {
     public interface IHasVariables
     {
-        protected Dictionary<string, Variable> Variables { get; set; }
-        public bool AddVariable(string variableName, Variable variable, out Exception? exception)
+        public Variables Variables { get; init; }
+    }
+    public class Variables
+    {
+        public Variables(Variables? derived = null)
         {
-            if (Variables.ContainsKey(variableName))
+            if (derived is null)
+                return;
+            foreach(var i in derived.Get())
+                VarData.Add(i.Key, i.Value);
+        }
+        protected Dictionary<string, Variable> VarData { get; set; } = new Dictionary<string, Variable>();
+        public bool Add(string variableName, Variable variable, out Exception? exception)
+        {
+            if (VarData.ContainsKey(variableName))
             {
                 exception = new DuplicateNameException($"Attempted a creation of a duplicate variable of name \"{variableName}\"");
                 return false;
             }
-            Variables.Add(variableName, variable);
+            VarData.Add(variableName, variable);
             exception = null;
             return true;
         }
-        public bool RemoveVariable(string variableName) => Variables.Remove(variableName);
+        public bool Remove(string variableName) => VarData.Remove(variableName);
         /// <returns>An immutable collection of variables this scope considers local. These variables may be managed via adding or removing</returns>
-        public ImmutableDictionary<string, Variable> GetVariables() => Variables.ToImmutableDictionary();
+        public ImmutableDictionary<string, Variable> Get() => VarData.ToImmutableDictionary();
     }
 }
