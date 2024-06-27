@@ -1,4 +1,5 @@
-﻿using SeleniteSeaScript.Variables;
+﻿using SeleniteSeaScript.Interfaces;
+using SeleniteSeaScript.Variables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SeleniteSeaScript.Scopes
 {
-	public class IfClausule : BasicScope
+    public class IfClausule : BasicScope
 	{
 		protected readonly BooleanVariable booleanVariable;
 		public bool expectedOutput { get;protected set; }

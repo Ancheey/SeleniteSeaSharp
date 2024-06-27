@@ -1,9 +1,10 @@
-﻿using SeleniteSeaScript.Variables;
+﻿using SeleniteSeaScript.Interfaces;
+using SeleniteSeaScript.Variables;
 using System.Collections.Immutable;
 
 namespace SeleniteSeaScript.Scopes
 {
-	public class BasicScope : ScriptAction, IScope
+    public class BasicScope : ScriptAction, IScope
 	{
 
 		public string GetScopeTitle() => "Basic Scope";

@@ -1,35 +1,37 @@
-﻿using SeleniteSeaScript.Variables;
+﻿using SeleniteSeaScript.Interfaces;
+using SeleniteSeaScript.Variables;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SeleniteSeaScript.Scopes
 {
-	public class ScriptScope : BasicScope
-	{
+    public class ProjectScope<T> : ScriptAction, IHasValue<T>, IHasParams, IHasVariables, IScope where T : Variable
+    {
 		private readonly string _name;
 		public VariableType? ReturnType { get; private set; }
 		public Variable? DefaultReturnValue { get; private set; } = null;
 		public Variable? ReturnValue { get; private set; } = null;
-		public Dictionary<string, ScriptActionParam> ScriptParams = new();
-		public ScriptScope(string projectTitle, Dictionary<string, ScriptActionParam> requiredParams) : base(null, new())
-		{
-			_name = projectTitle;
-			ScriptParams = requiredParams;
-		}
-		public bool AddParamValue(string name, Variable variable)
-		{
-			if (!ScriptParams.ContainsKey(name))
-				return false; //Not on ScriptParams list
-			if (ScriptParams[name].ParamType != variable.Type)
-				return false; //Not a valid type
-			if (derivedVariables.ContainsKey(name))
-				return false; //Already in the collection
-			derivedVariables.Add(name, variable);
-			return true;
-		}
-		public new string GetScopeTitle() => _name;
-	}
+        Dictionary<string, Variable> IHasVariables.Variables { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        List<ScriptAction> IScope.ScopeActions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        T IHasValue<T>.Value { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ProjectScope(string projectTitle) : base(null)
+        {
+            _name = projectTitle;
+        }
+
+        public override bool Execute(out Exception? exception)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ImmutableDictionary<string, IHasParams.ParamDescriptor> GetParams()
+        {
+            throw new NotImplementedException(); //Add some way to read required params from the file and addition of em 
+        }
+    }
 }

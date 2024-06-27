@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <Folder Include="classes\" />
+    <Folder Include="controls\" />
   </ItemGroup>
 
 </Project>

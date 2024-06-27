@@ -1,9 +1,10 @@
 ﻿using SeleniteSeaScript.Exceptions;
+using SeleniteSeaScript.Interfaces;
 using SeleniteSeaScript.Variables;
 
 namespace SeleniteSeaScript.Scopes
 {
-	public class ElseIfClausule : IfClausule
+    public class ElseIfClausule : IfClausule
 	{
 		public ElseIfClausule(BooleanVariable booleanStatement, bool expectedOutput, IScope? Parent, Dictionary<string, Variable> derivedVariables) 
 			: base(booleanStatement, expectedOutput, Parent, derivedVariables)

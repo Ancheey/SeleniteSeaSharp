@@ -1,9 +1,10 @@
 ﻿using SeleniteSeaScript.Exceptions;
+using SeleniteSeaScript.Interfaces;
 using SeleniteSeaScript.Variables;
 
 namespace SeleniteSeaScript.Scopes
 {
-	internal class ElseClausule : BasicScope
+    internal class ElseClausule : BasicScope
 	{
 		public ElseClausule(IScope? Parent, Dictionary<string, Variable> derivedVariables) : base(Parent, derivedVariables)
 		{}

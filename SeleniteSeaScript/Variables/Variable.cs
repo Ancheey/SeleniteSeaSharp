@@ -20,8 +20,7 @@ namespace SeleniteSeaScript.Variables
 	{
 		Object,
 		String,
-		Integer,
-		Decimal,
+		Number,
 		Boolean,
 		Array
 	}

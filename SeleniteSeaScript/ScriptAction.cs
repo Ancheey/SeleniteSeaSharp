@@ -1,4 +1,4 @@
-﻿using SeleniteSeaScript.Scopes;
+﻿using SeleniteSeaScript.Interfaces;
 using SeleniteSeaScript.Variables;
 using System;
 using System.Collections.Generic;
@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace SeleniteSeaScript
 {
-	public abstract class ScriptAction
+    public abstract class ScriptAction
 	{
-		public abstract ImmutableDictionary<string,ScriptActionParam> GetActionParams();
-		public IScope? Scope { get; set; }
+        public IScope? Scope { get; set; }
 
 		public ScriptAction(IScope? scope)
 		{
@@ -20,10 +19,4 @@ namespace SeleniteSeaScript
 		}
 		public abstract bool Execute(out Exception? exception);
 	}
-
-	/// <summary>
-	/// Used primarily for IDEs
-	/// </summary>
-	public record ScriptActionParam(VariableType ParamType, object? Value, bool Required, string Description);
-
 }
