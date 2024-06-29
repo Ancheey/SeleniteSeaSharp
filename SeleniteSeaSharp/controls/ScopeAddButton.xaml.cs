@@ -30,7 +30,7 @@ namespace SeleniteSeaSharp_Editor.controls
             set
             {
                 Diamond.BorderBrush = new SolidColorBrush(value);
-                TailColor.Color = Color;
+                TailColor.Color = value;
                 Plus.Foreground = new SolidColorBrush(value);
                 _AnimTargetColor = value;
             }
@@ -39,33 +39,32 @@ namespace SeleniteSeaSharp_Editor.controls
         {
             InitializeComponent();
             Hitbox.MouseLeftButtonUp += OnClickEvent;
-            Diamond.Background = new SolidColorBrush(Colors.Transparent);
+            Opacity = 0.2;
         }
         public ScopeAddButton()
         {
             InitializeComponent();
-            Diamond.Background = new SolidColorBrush(Colors.Transparent);
+            Opacity = 0.2;
         }
 
         private void Hitbox_MouseEnter(object sender, MouseEventArgs e)
         {
-            ColorAnimation anim = new()
+            DoubleAnimation da = new()
             {
-                From = Colors.Transparent,
-                To = _AnimTargetColor,
+                To = 1.0,
                 Duration = TimeSpan.FromSeconds(0.2)
             };
-            Diamond.Background.BeginAnimation(SolidColorBrush.ColorProperty, anim);
+            BeginAnimation(OpacityProperty, da);
         }
 
         private void Hitbox_MouseLeave(object sender, MouseEventArgs e)
         {
-            ColorAnimation anim = new()
+            DoubleAnimation da = new()
             {
-                To = Colors.Transparent,
+                To = 0.2,
                 Duration = TimeSpan.FromSeconds(0.2)
             };
-            Diamond.Background.BeginAnimation(SolidColorBrush.ColorProperty, anim);
+            BeginAnimation(OpacityProperty, da);
         }
     }
 }

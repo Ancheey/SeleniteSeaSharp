@@ -5,20 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SeleniteSeaSharp_Editor.controls"
              mc:Ignorable="d" 
-             d:DesignHeight="3" d:DesignWidth="20" ClipToBounds="False">
-    <Grid Width="20" Height="3" Cursor="Hand" x:Name="Hitbox" MouseEnter="Hitbox_MouseEnter" MouseLeave="Hitbox_MouseLeave">
-        <Canvas Margin="-17,-6">
-            <Border BorderThickness="0.5" BorderBrush="Yellow" Height="10" Width="10" x:Name="Diamond" x:FieldModifier="private">
-                <Border.LayoutTransform>
-                    <RotateTransform Angle="45"/>
-                </Border.LayoutTransform>
-            </Border>
-        </Canvas>
-        <Canvas Margin="-18,-12.3">
+             Margin="-18,0,0,0"
+             d:DesignHeight="15" d:DesignWidth="20" ClipToBounds="False">
+    <Grid Height="15" Cursor="Hand" x:Name="Hitbox" MouseEnter="Hitbox_MouseEnter" MouseLeave="Hitbox_MouseLeave">
+        <Border BorderThickness="0.8" BorderBrush="Yellow" Height="10" Width="10" x:Name="Diamond" x:FieldModifier="private" HorizontalAlignment="Left">
+            <Border.LayoutTransform>
+                <RotateTransform Angle="45"/>
+            </Border.LayoutTransform>
+        </Border>
+        <Canvas Margin="-1.3,-4.4">
             <Label Content="+" FontSize="12" Foreground="Yellow" x:Name="Plus" x:FieldModifier="private"/>
         </Canvas>
-        <Canvas Height="1" Width="1" HorizontalAlignment="Right" Margin="0,-2,0,0" x:Name="Tail" x:FieldModifier="private">
-            <Border BorderThickness="0,0.5,0,0.5" Height="2" Width="40" Margin="-20,0,0,0">
+        <Canvas Height="3" Width="1" HorizontalAlignment="Left" x:Name="Tail" x:FieldModifier="private" VerticalAlignment="Center">
+            <Border BorderThickness="0,0.7,0,0.7" Height="3" Width="150" Margin="13.5,0,0,0">
                 <Border.BorderBrush>
                     <LinearGradientBrush EndPoint="1,0.5" StartPoint="0.5,0.5">
                         <GradientStop Color="Yellow" x:Name="TailColor" x:FieldModifier="private"/>

@@ -9,7 +9,7 @@ namespace SeleniteSeaScript.Variables
 	public abstract class Variable
 	{
 		public VariableType? Type { get; private set; }
-		public object? Value { get; protected set; }
+		public object? Value { get; set; }
 		public Variable(VariableType? type, object? value)
 		{
 			Type = type;

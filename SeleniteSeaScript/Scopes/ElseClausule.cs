@@ -23,7 +23,7 @@ namespace SeleniteSeaScript.Scopes
 			}
 			if (ScopeActions[ScopeActionIDOfThis - 1] is IfClausule IFC)
 			{
-				if (IFC.ExpectedOutput != IFC.EvaluatedOutput) //Execute scope if the previous If or elseIF didn't execute
+				if (IFC.Evaluated != IFC.Expected) //Execute scope if the previous If or elseIF didn't execute
 					return base.Execute(out exception);
 				else
 				{

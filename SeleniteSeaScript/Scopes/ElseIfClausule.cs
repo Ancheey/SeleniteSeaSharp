@@ -7,7 +7,7 @@ namespace SeleniteSeaScript.Scopes
     public class ElseIfClausule : IfClausule
 	{
 		//This one requires a parent
-        public ElseIfClausule(BooleanVariable booleanStatement, bool expectedOutput, IScope? Parent, Interfaces.Variables? derived = null) : base(booleanStatement, expectedOutput, Parent, derived)
+        public ElseIfClausule(IScope? Parent, Interfaces.Variables? derived = null) : base(Parent, derived)
         {}
 
         public new bool Execute(out Exception? exception)
@@ -26,7 +26,9 @@ namespace SeleniteSeaScript.Scopes
 			}
 			if (ScopeActions[ScopeActionIDOfThis - 1] is IfClausule IFC)
 			{
-				if (IFC.ExpectedOutput != IFC.EvaluatedOutput && (EvaluatedOutput = booleanVariable.Value) == ExpectedOutput) //Execute scope if the previous If or elseIF didn't execute AND evaluation of this object is correct
+                Evaluated = ((BooleanVariable)Params["BooleanStatement"]).Value;
+
+                if (IFC.Expected != IFC.Evaluated && Expected == Evaluated) //Execute scope if the previous If or elseIF didn't execute AND evaluation of this object is correct
 					return base.Execute(out exception);
 				else
 				{

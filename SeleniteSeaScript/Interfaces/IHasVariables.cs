@@ -37,5 +37,9 @@ namespace SeleniteSeaScript.Interfaces
         public bool Remove(string variableName) => VarData.Remove(variableName);
         /// <returns>An immutable collection of variables this scope considers local. These variables may be managed via adding or removing</returns>
         public ImmutableDictionary<string, Variable> Get() => VarData.ToImmutableDictionary();
+        public Variable this[string a] {
+            get { return VarData[a]; }
+        }
+
     }
 }

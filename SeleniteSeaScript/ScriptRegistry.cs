@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SeleniteSeaScript.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
@@ -7,13 +8,19 @@ using System.Threading.Tasks;
 
 namespace SeleniteSeaScript
 {
-    public static class ScriptRegistry
+    public class ScriptRegistry
     {
-        public record ScopeDescriptor(string Name, string EditorDescription)
-        {
-
+        public ScriptRegistry() {
+            //TODO FOR EDITOR
+            //register all classes with descriptors
         }
+        private readonly Dictionary<Type, ActionDescriptor> Scopes = new();
+        private readonly Dictionary<Type, ActionDescriptor> Actions = new();
+        private readonly Dictionary<Type, ActionDescriptor> Variables = new();//Change
 
+
+        public record ActionDescriptor(string DisplayName, string EditorDescription, List<ParamDescriptor> Params);
+        
 
     }
 }

@@ -8,20 +8,24 @@ using System.Threading.Tasks;
 
 namespace SeleniteSeaScript.Scopes
 {
-    public class IfClausule : BasicScope
+    public class IfClausule : BasicScope, IHasParams
 	{
-		protected readonly BooleanVariable booleanVariable;
-		public bool ExpectedOutput { get;protected set; }
-		public bool? EvaluatedOutput { get; protected set; } = null;
-		public IfClausule(BooleanVariable booleanStatement, bool expectedOutput, IScope? Parent = null, Interfaces.Variables? derived = null) : base(Parent, derived)
+        public Params Params { get; set; }
+		public bool Evaluated { get; set; } = false;
+		public bool Expected => ((BooleanVariable)Params["ExpectedValue"]).Value;
+        public IfClausule(IScope? Parent = null, Interfaces.Variables? derived = null) : base(Parent, derived)
 		{
-			booleanVariable = booleanStatement;
-			ExpectedOutput = expectedOutput;
+			Params = new Params(Variables, new()
+			{
+				{ "BooleanStatement",new(VariableType.Boolean,new BooleanVariable(true),"Statement")},
+                { "ExpectedValue",new(VariableType.Boolean,new BooleanVariable(true),"Required")}
+            });
 		}
 
         public new bool Execute(out Exception? exception)
 		{
-			if((EvaluatedOutput = booleanVariable.Value) == ExpectedOutput)
+			Evaluated = ((BooleanVariable)Params["BooleanStatement"]).Value;
+            if (Evaluated == Expected)
 				return base.Execute(out exception);
 			else
 			{
