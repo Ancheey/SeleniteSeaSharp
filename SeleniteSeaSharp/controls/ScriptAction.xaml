@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:SeleniteSeaSharp_Editor.controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+    <StackPanel Orientation="Horizontal">
+        <Label Content="Sample Action with" x:Name="Text1" x:FieldModifier="private"/>
+        <Label Content="SampleVar" Foreground="Green"  x:Name="Value1" x:FieldModifier="private"/>
+    </StackPanel>
 </local:DisplayAction>

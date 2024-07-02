@@ -1,12 +1,6 @@
 ﻿using SeleniteSeaScript.Exceptions;
 using SeleniteSeaScript.Interfaces;
 using SeleniteSeaScript.Scopes;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeleniteSeaScript.Actions
 {
@@ -18,7 +12,7 @@ namespace SeleniteSeaScript.Actions
         public override bool Execute(out Exception? exception)
         {
             exception = null;
-            var parent = Scope;
+            var parent = Parent;
             while(parent is not LoopClausule)
             {
                 if (parent is null || parent is not ScriptAction)
@@ -27,7 +21,7 @@ namespace SeleniteSeaScript.Actions
                     return false;
                 }
                 else
-                    parent = (Scope as ScriptAction)?.Scope;
+                    parent = (Parent as ScriptAction)?.Parent;
             }
             (parent as LoopClausule)?.Break();
             return true;

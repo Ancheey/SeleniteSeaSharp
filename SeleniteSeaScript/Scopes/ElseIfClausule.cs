@@ -7,6 +7,7 @@ namespace SeleniteSeaScript.Scopes
     public class ElseIfClausule : IfClausule
 	{
 		//This one requires a parent
+		//Add something to check if previous is an elfeif not evaluated
         public ElseIfClausule(IScope? Parent, Interfaces.Variables? derived = null) : base(Parent, derived)
         {}
 

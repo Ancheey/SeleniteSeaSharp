@@ -1,0 +1,21 @@
+﻿<Window x:Class="SeleniteSeaSharp_Editor.controls.NewActionDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SeleniteSeaSharp_Editor.controls"
+        mc:Ignorable="d"
+        Title="NewActionDialog" Height="200" Width="400" WindowStyle="None" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF1C2527"/>
+            <GradientStop Color="#FF0E1314" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Border BorderThickness="1" BorderBrush="White">
+        <DockPanel>
+            <TextBox DockPanel.Dock="Top" Background="Transparent"/>
+            <ListBox Background="Transparent" x:Name="ActionSelectionListbox"/>
+        </DockPanel>
+    </Border>
+</Window>

@@ -17,10 +17,10 @@ namespace SeleniteSeaScript.Scopes
         public Interfaces.Variables Variables { get; init; } = new();
         public Scope Scope { get; init; } = new();
         public Params Params { get; set; }
-        public ProjectScope(string projectTitle) : base(null)
+        public ProjectScope(string projectTitle, Dictionary<string, ParamDescriptor> parameters) : base(null)
         {
             _name = projectTitle;
-            Params = new Params(Variables, new Dictionary<string, Params.ParamDescriptor>());
+            Params = new Params(Variables, parameters);
         }
         public void ReadProjectData()
         {

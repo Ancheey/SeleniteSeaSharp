@@ -20,7 +20,17 @@ namespace SeleniteSeaSharp_Editor.controls
     /// </summary>
     public partial class ScriptAction : DisplayAction
     {
-        public override Color Color { get => Colors.Wheat; set { _color = value; } }
+        public override Color Color { get => Colors.Wheat; set 
+            { 
+                _color = value;
+                Text1.Foreground = new SolidColorBrush(_color);
+            } 
+        }
+        public ScriptAction(Color color)
+        {
+            InitializeComponent();
+            Color = color;
+        }
         public ScriptAction()
         {
             InitializeComponent();

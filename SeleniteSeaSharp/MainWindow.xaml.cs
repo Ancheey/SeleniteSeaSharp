@@ -19,6 +19,7 @@ namespace SeleniteSeaSharp_Editor
 		public MainWindow()
 		{
 			InitializeComponent();
+			LogConsole.AppendText("Welcome to Selenite Sea Sharp [ver. Preview]");
 		}
 	}
 }

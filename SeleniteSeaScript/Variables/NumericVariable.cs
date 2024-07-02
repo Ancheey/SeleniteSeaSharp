@@ -8,7 +8,7 @@ namespace SeleniteSeaScript.Variables
 {
 	public class NumericVariable : Variable
 	{
-		public NumericVariable(double? value) : base(VariableType.Integer, value)
+		public NumericVariable(double? value) : base(VariableType.Number, value)
 		{
 		}
 		public new double Value

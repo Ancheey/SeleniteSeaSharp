@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Reflection;
+using static SeleniteSeaScript.ScriptRegistry;
+using SeleniteSeaScript.Scopes;
+using SeleniteSeaScript.Actions;
 
 namespace SeleniteSeaSharp_Editor.controls
 {
@@ -49,10 +52,17 @@ namespace SeleniteSeaSharp_Editor.controls
             var additionbutton = new ScopeAddButton((o, e) => { ClickAddButton(index + 2); });
             ScopeActionsContainer.Children.Insert(index+2, additionbutton);
         }
-        public void ClickAddButton(int targetindex)
+        public void ClickAddButton(int targetindex) => NewActionDialog.ShowDialog((type,desc) => ActionAddition(targetindex,type,desc));
+        private void ActionAddition(int targetindex,Type? type, ActionDescriptor? desc) 
         {
-            //Show gui to pick an action
-            AddAction(new ScopeAction(), targetindex);
+            //todo: switch for actions
+            //This is badly done, but has to be this way for now
+            if (type == null)
+                return;
+            if(type == typeof(BasicScope))
+                AddAction(new ScopeAction(), targetindex);
+            if (type == typeof(NewVariableAction))
+                AddAction(new ScriptAction(Colors.Blue), targetindex);
         }
     }
 }

@@ -12,4 +12,8 @@
     <Folder Include="classes\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SeleniteSeaScript\SeleniteSeaScript.csproj" />
+  </ItemGroup>
+
 </Project>

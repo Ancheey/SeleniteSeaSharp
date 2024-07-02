@@ -39,12 +39,12 @@ namespace SeleniteSeaSharp_Editor.controls
         {
             InitializeComponent();
             Hitbox.MouseLeftButtonUp += OnClickEvent;
-            Opacity = 0.2;
+            Opacity = 0.05;
         }
         public ScopeAddButton()
         {
             InitializeComponent();
-            Opacity = 0.2;
+            Opacity = 0.05;
         }
 
         private void Hitbox_MouseEnter(object sender, MouseEventArgs e)
@@ -61,7 +61,7 @@ namespace SeleniteSeaSharp_Editor.controls
         {
             DoubleAnimation da = new()
             {
-                To = 0.2,
+                To = 0.05,
                 Duration = TimeSpan.FromSeconds(0.2)
             };
             BeginAnimation(OpacityProperty, da);
